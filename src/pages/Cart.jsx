@@ -12,7 +12,7 @@ function Cart() {
             {cartItems.length === 0 ? (
                 <p>Your cart is empty.</p>
             ) : (
-                <ul className="flex gap-2 flex-col h-[80vh] overflow-y-auto">
+                <ul className="flex gap-2 flex-col max-h-[80vh] overflow-y-auto">
                     {cartItems.map((item) => (
                         <>
                             {item.quantity > 0 && (
@@ -22,7 +22,6 @@ function Cart() {
                                         <button className="w-12 bg-gray-200 hover:bg-gray-300" onClick={() => decreaseQuantity(item.id)}>-</button>
                                         <button className="w-12 bg-gray-200 hover:bg-gray-300" onClick={() => addToCart(item)}>+</button>
                                     </div>
-                                    <p>${(item.price * item.quantity).toFixed(2)}</p>
                                 </li>
                             )}
                                 
@@ -33,7 +32,9 @@ function Cart() {
             )}
 
             <div>
-                <h2>Total: ${cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}</h2>
+                <h2>Sub Total: ${cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}</h2>
+                <p>Tax (18%): ${cartItems.reduce((total, item) => total + item.price * item.quantity * 0.18, 0).toFixed(2)}</p>
+                <h2>Total: ${cartItems.reduce((total, item) => total + item.price * item.quantity * 1.18, 0).toFixed(2)}</h2>
             </div>
         </div>
     )
